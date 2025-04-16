@@ -34,6 +34,69 @@ export type Database = {
   };
   public: {
     Tables: {
+      classrooms: {
+        Row: {
+          homeroom_id: string;
+          id: string;
+          name: string;
+        };
+        Insert: {
+          homeroom_id: string;
+          id: string;
+          name: string;
+        };
+        Update: {
+          homeroom_id?: string;
+          id?: string;
+          name?: string;
+        };
+        Relationships: [];
+      };
+      exams: {
+        Row: {
+          author_id: string;
+          classroom_id: string;
+          id: string;
+          name: string;
+          questions: Json[];
+        };
+        Insert: {
+          author_id: string;
+          classroom_id: string;
+          id: string;
+          name: string;
+          questions: Json[];
+        };
+        Update: {
+          author_id?: string;
+          classroom_id?: string;
+          id?: string;
+          name?: string;
+          questions?: Json[];
+        };
+        Relationships: [];
+      };
+      members: {
+        Row: {
+          classroom_id: string;
+          id: string;
+          joined_at: string;
+          role: Database["public"]["Enums"]["roles"];
+        };
+        Insert: {
+          classroom_id: string;
+          id: string;
+          joined_at: string;
+          role: Database["public"]["Enums"]["roles"];
+        };
+        Update: {
+          classroom_id?: string;
+          id?: string;
+          joined_at?: string;
+          role?: Database["public"]["Enums"]["roles"];
+        };
+        Relationships: [];
+      };
       users: {
         Row: {
           avatar_url: string | null;
@@ -60,7 +123,7 @@ export type Database = {
       [_ in never]: never;
     };
     Enums: {
-      [_ in never]: never;
+      roles: "homeroom" | "teacher" | "student";
     };
     CompositeTypes: {
       [_ in never]: never;
@@ -182,6 +245,8 @@ export const Constants = {
     Enums: {},
   },
   public: {
-    Enums: {},
+    Enums: {
+      roles: ["homeroom", "teacher", "student"],
+    },
   },
 } as const;
